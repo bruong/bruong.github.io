@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bruong - Telegram-боты и продвижение</title>
+    <!-- Подключаем Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .nickname {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .avatar:hover {
+            opacity: 0.8;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            opacity: 0.6;
+            margin-bottom: 25px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+
+        /* Стили блока Info Bruong */
+        .info-table {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .info-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+            text-align: center;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 8px;
+            color: #bbb;
+        }
+
+        .info-item strong {
+            color: #bbb;
+            font-weight: normal;
+        }
+
+        .info-item span {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .info-location {
+            text-align: center;
+            font-size: 11px;
+            color: #666;
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: opacity 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .links a:hover {
+            opacity: 0.7;
+        }
+
+        /* Иконки для ссылок */
+        .icon-funpay {
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .footer {
+            font-size: 12px;
+            opacity: 0.4;
+        }
+
+        @media (max-height: 700px) {
+            body {
+                padding: 15px;
+            }
+            
+            .nickname {
+                font-size: 32px;
+                margin-bottom: 12px;
+            }
+            
+            .avatar {
+                width: 130px;
+                height: 130px;
+                margin-bottom: 8px;
+            }
+            
+            .title {
+                font-size: 22px;
+                margin-bottom: 20px;
+            }
+            
+            .info-table {
+                padding: 15px;
+                margin-bottom: 25px;
+            }
+            
+            .links {
+                margin-bottom: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nickname">bruong</div>
+    
+    <a href="https://t.me/bruongFunPay" target="_blank">
+        <img src="https://files.catbox.moe/jkbfsr.jpg" alt="Avatar" class="avatar">
+    </a>
+    
+    <div class="subtitle">Heroku user & FunPay seller</div>
+    
+    <div class="title">Telegram-боты и продвижение</div>
+    
+    <!-- Info Bruong Block -->
+    <div class="info-table">
+        <div class="info-title">Info Bruong</div>
+        <div class="info-item">
+            <strong>Name:</strong> <span>bruong</span>
+        </div>
+        <div class="info-item">
+            <strong>Age:</strong> <span>14+</span>
+        </div>
+        <div class="info-item">
+            <strong>Time:</strong> <span>Moscow +0</span>
+        </div>
+        <div class="info-item">
+            <strong>Birthday:</strong> <span>22 September</span>
+        </div>
+        <div class="info-location">live in Russia</div>
+    </div>
+    
+    <div class="links">
+        <a href="https://funpay.com/users/18325079/" target="_blank">
+            <div class="icon-funpay">FP</div>
+            FunPay
+        </a>
+        <a href="https://tiktok.com/@bruongfunpay" target="_blank">
+            <i class="fab fa-tiktok"></i>
+            TikTok
+        </a>
+        <a href="https://t.me/bruongFunPay" target="_blank">
+            <i class="fab fa-telegram"></i>
+            Telegram
+        </a>
+    </div>
+    
+    <div class="footer">© bruong 2025</div>
+</body>
+</html>
