@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bruong | Telegram-боты и продвижение</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* ===== МОБИЛЬНАЯ ВЕРСИЯ (до 768px) ===== */
+        @media screen and (max-width: 767px) {
+            body {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                padding: 15px;
+            }
+
+            .left-column {
+                align-self: stretch;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .right-column {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .nickname {
+                font-size: 28px;
+                margin-top: 15px;
+                color: #ffffff;
+            }
+
+            .avatar {
+                width: 120px;
+                height: 120px;
+                margin: 15px 0;
+            }
+
+            .subtitle {
+                font-size: 13px;
+            }
+
+            .title {
+                font-size: 18px;
+                margin-bottom: 25px;
+            }
+
+            .section {
+                padding: 20px;
+                margin-bottom: 15px;
+                width: 100% !important;
+            }
+        }
+
+        /* ===== ПК ВЕРСИЯ (от 768px) ===== */
+        @media screen and (min-width: 768px) {
+            body {
+                display: grid;
+                grid-template-columns: 1.4fr 360px;
+                align-items: start;
+                padding: 30px 40px;
+                gap: 30px;
+            }
+
+            .left-column {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+                width: 100%;
+            }
+
+            .right-column {
+                position: sticky;
+                top: 30px;
+                height: fit-content;
+                width: 100%;
+            }
+
+            .nickname {
+                font-size: 36px;
+                color: #ffffff;
+            }
+
+            .avatar {
+                width: 150px;
+                height: 150px;
+                margin: 20px 0;
+            }
+
+            .title {
+                font-size: 22px;
+            }
+
+            .section {
+                padding: 22px;
+                margin-bottom: 20px;
+                width: 100%;
+            }
+        }
+
+        /* ===== ОБЩИЕ СТИЛИ ===== */
+        .nickname {
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .avatar {
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .avatar:hover {
+            border-color: #00ff88;
+            transform: scale(1.05);
+        }
+
+        .subtitle {
+            opacity: 0.7;
+            font-weight: 500;
+        }
+
+        .title {
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 15px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+            text-align: center;
+        }
+
+        .section-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 8px;
+            color: #bbb;
+        }
+
+        .section-item strong {
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        .section-item span {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .section-note {
+            font-size: 11px;
+            color: #666;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-style: italic;
+        }
+
+        .services-grid {
+            display: grid;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.2s ease;
+        }
+
+        .service-icon {
+            width: 35px;
+            height: 35px;
+            background: rgba(0,255,136,0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #00ff88;
+            flex-shrink: 0;
+        }
+
+        .service-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .service-desc {
+            font-size: 11px;
+            color: #aaa;
+        }
+
+        .service-price {
+            font-size: 12px;
+            font-weight: 700;
+            color: #00ff88;
+            margin-left: 8px;
+        }
+
+        .social-grid {
+            display: grid;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .soc-link {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .soc-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .soc-name {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .soc-desc {
+            font-size: 10px;
+            opacity: 0.5;
+            margin-left: auto;
+        }
+
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #ffffff;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .contact-btn.telegram {
+            background: rgba(0, 136, 204, 0.2);
+        }
+
+        .contact-btn.telegram:hover {
+            background: rgba(0, 136, 204, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            font-size: 11px;
+            opacity: 0.4;
+            margin-top: 25px;
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            grid-column: 1 / -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="left-column">
+        <div class="nickname">bruong</div>
+        <a href="https://t.me/bruongFunPay" target="_blank">
+            <img src="https://files.catbox.moe/jkbfsr.jpg" alt="Avatar" class="avatar">
+        </a>
+        <div class="subtitle">Heroku user & FunPay seller</div>
+        <div class="title">Telegram-боты и продвижение</div>
+
+        <!-- INFO BRUONG -->
+        <div class="section">
+            <div class="section-title">Info Bruong</div>
+            <div class="section-item"><strong>Name:</strong> <span>bruong</span></div>
+            <div class="section-item"><strong>Age:</strong> <span>14+</span></div>
+            <div class="section-item"><strong>Time zone:</strong> <span>UTC +3</span></div>
+            <div class="section-item"><strong>Birthday:</strong> <span>22 September</span></div>
+            <div class="section-note">Work with FunPay, Heroku, GitHub</div>
+        </div>
+
+        <!-- SERVICES -->
+        <div class="section">
+            <div class="section-title">Services</div>
+            
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-icon"><i class="fab fa-telegram"></i></div>
+                    <div class="service-info">
+                        <div class="service-title">Telegram-боты</div>
+                        <div class="service-desc">Автоответчики, магазины, парсеры</div>
+                    </div>
+                    <div class="service-price">от 500₽</div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-robot"></i></div>
+                    <div class="service-info">
+                        <div class="service-title">FunPay автоматизация</div>
+                        <div class="service-desc">Аналитика, скрипты, автоответы</div>
+                    </div>
+                    <div class="service-price">от 300₽</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-column">
+        <!-- SOCIAL LINKS -->
+        <div class="section">
+            <div class="section-title">Social Links</div>
+            <div class="social-grid">
+                <a href="https://funpay.com/users/18325079/" class="soc-link" target="_blank">
+                    <div class="soc-icon icon-funpay">FP</div>
+                    <div class="soc-name">FunPay</div>
+                    <div class="soc-desc"><i class="fas fa-external-link-alt"></i></div>
+                </a>
+
+                <a href="https://t.me/bruongFunPay" class="soc-link" target="_blank">
+                    <div class="soc-icon"><i class="fab fa-telegram"></i></div>
+                    <div class="soc-name">Telegram</div>
+                    <div class="soc-desc"><i class="fas fa-external-link-alt"></i></div>
+                </a>
+
+                <a href="https://tiktok.com/@bruongfunpay" class="soc-link" target="_blank">
+                    <div class="soc-icon"><i class="fab fa-tiktok"></i></div>
+                    <div class="soc-name">TikTok</div>
+                    <div class="soc-desc"><i class="fas fa-external-link-alt"></i></div>
+                </a>
+
+                <a href="https://github.com/bruong" class="soc-link" target="_blank">
+                    <div class="soc-icon"><i class="fab fa-github"></i></div>
+                    <div class="soc-name">GitHub</div>
+                    <div class="soc-desc"><i class="fas fa-external-link-alt"></i></div>
+                </a>
+            </div>
+        </div>
+
+        <!-- CONTACT - ССЫЛКА ИЗМЕНЕНА -->
+        <div class="section">
+            <div class="section-title">Contact</div>
+            <div class="contact-buttons">
+                <a href="https://t.me/bruong" class="contact-btn telegram" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                    Telegram
+                </a>
+            </div>
+            <div class="section-note">
+                Отвечу в течение 15 минут
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">© bruong 2025</div>
+</body>
+</html>
+ 
